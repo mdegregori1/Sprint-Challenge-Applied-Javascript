@@ -16,4 +16,52 @@
 //   </div>
 // </div>
 //
-// Create a card for each of the articles and add the card to the DOM.
+// Create a card for each of the articles and add the card to the DOM
+
+const createCards = document.querySelector('.cards-container')
+axios 
+    .get("https://lambda-times-backend.herokuapp.com/articles")
+    .then(response =>{
+        console.log('here is your data',response.data.articles);
+        //add function information here once you make it 
+        const newCard = createArticle(response.data.articles);
+        createCards.appendChild(newCard);
+      
+    })
+    .catch(error => {
+        console.log('Data Failure', error);
+    });
+
+    function createArticle(authorName, authorPhoto, headline){
+        const mainCard = document.createElement('div');
+        const mainHeadline = document.createElement('div');
+        const mainAuthor = document.createElement('div');
+        const imageContainer = document.createElement('div');
+        const mainImage = document.createElement('img');
+        const byAuthor = document.createElement('span');
+
+        // class names 
+
+        mainCard.classList.add('card');
+        mainHeadline.classList.add('headline');
+        mainAuthor.classList.add('author');
+        imageContainer.classList.add('img-container');
+    
+        // append 
+
+        mainCard.appendChild(mainHeadline);
+        mainCard.appendChild(mainAuthor);
+        mainAuthor.appendChild(imageContainer);
+        mainAuthor.appendChild(byAuthor); 
+        imageContainer.appendChild(mainImage);
+
+        //text content 
+
+        mainHeadline.textContent = headline;
+        mainImage.src = authorPhoto;
+        byAuthor.textContent = `By: ${authorName}`;
+
+        return mainCard;
+    }
+    
+
