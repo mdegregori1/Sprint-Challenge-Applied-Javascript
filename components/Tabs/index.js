@@ -7,28 +7,37 @@
 //
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
-// const tabStart = document.querySelector('.topics');
 
-// axios 
-//     .get("https://lambda-times-backend.herokuapp.com/topics")
-//     .then(response =>{
-//         console.log('here is your data',response.data);
-//         //add function information here once you make it 
-//         const newTab = makeTabs(response.data);
-//         tabStart.appendChild(newTab);
-//     })
-//     .catch(error => {
-//         console.group('Data Failure', error);
-//     });
+function createTabs(array){
+    const tab = document.createElement('div');
 
-// // function 
-// function makeTabs(arr){
-//     //create element
-//     const 
-//     tab = document.createElement('div');
+    //classes 
+    tab.classList.add('tab');
 
-//     // classes 
-//     tab.classList.add('tab')
+    //content 
+    tab.textContent = array;
+   
+    return tab;
+}
 
-//     //append data 
-    
+axios 
+    .get("https://lambda-times-backend.herokuapp.com/topics")
+    .then(response =>{
+        topicsArray= response.data.topics;
+        topicsArray.forEach(data =>{
+            const newTab = createTabs(data);
+            const topicsContainer= document.querySelector('.topics');
+            topicsContainer.appendChild(newTab);
+        })
+    ;
+
+    })
+    .catch(error => {
+        console.group('Data Failure', error);
+    });
+
+
+
+
+
+  

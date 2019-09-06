@@ -26,6 +26,8 @@ axios
         //add function information here once you make it 
         const newCard = createArticle(response.data.articles);
         createCards.appendChild(newCard);
+        //add forEach
+
       
     })
     .catch(error => {
