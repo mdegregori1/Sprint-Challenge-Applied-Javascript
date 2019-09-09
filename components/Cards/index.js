@@ -24,10 +24,20 @@ axios
     .then(response =>{
         console.log('here is your data',response.data.articles);
         //add function information here once you make it 
-        const newCard = createArticle(response.data.articles);
-        Object.keys(newCard)
-        for (const newCard of createCards);
-        createCards.appendChild(newCard);
+        // console.log('newCard',newCard);
+        const keys = Object.keys(response.data.articles)
+        for (const key of keys){
+            // console.log('key', key);
+            // console.log(response.data.articles[key])
+            response.data.articles[key].forEach(e =>{
+                console.log('e',e);
+                const newCard = createArticle(e.authorName,e.authorPhoto,e.headline);
+                createCards.append(newCard);
+            })
+        }
+        console.log('keys',keys);
+        // for (const newCard of createCards);
+        // createCards.appendChild(newCard);
         //add forEach
 
       
